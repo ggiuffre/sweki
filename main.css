@@ -1,16 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+
 body {
 	background-color: #F1F1EF;
 	color: #000036;
 	margin: auto;
-	font-family: Courier;
+	font-family: 'Open Sans', sans-serif;
 }
 
 a {
-	color: #000036;
+	text-decoration: none;
 }
 
 a:hover {
-	font-weight: bold;
+	text-decoration: underline;
 }
 
 
@@ -67,12 +69,14 @@ a:hover {
 
 /*   nav   */
 
-#nav {
-	list-style-type: circle;
+#nav li.app {
+	list-style-type: none;
+	margin-left: -1em;
 }
 
-#nav a {
-	text-decoration: none;
+#nav li.app:before {
+	content: "+ ";
+	color: green;
 }
 
 

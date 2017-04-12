@@ -111,18 +111,20 @@
 \end{verbatim}
 </xsl:template>
 
+<!-- inline quotations -->
+<xsl:template match="q">\textquote{<xsl:apply-templates />}</xsl:template>
+
 
 
 <!-- table -->
-<xsl:template match="table">
-	\begin{table}
-		\begin{tabular}{<xsl:for-each select="tr[1]/th">l </xsl:for-each>}
-		\toprule
-			<xsl:apply-templates />
-		\bottomrule
-		\end{tabular}
-		\caption{}
-	\end{table}
+<xsl:template match="table">\begin{table}
+	\begin{tabular}{<xsl:for-each select="tr[1]/th">l </xsl:for-each>}
+	\toprule
+		<xsl:apply-templates />
+	\bottomrule
+	\end{tabular}
+	\caption{}
+\end{table}
 </xsl:template>
 
 <!-- table row -->
@@ -154,7 +156,9 @@
 
 
 <!-- footnotes -->
-<xsl:template match="sup[@class='footnote']"><xsl:variable name="ftn" select="'substring(a/@href, 5)'" />\footnote{<xsl:value-of select="/html/body/div[@id='footnotes']/ol/li[$ftn]" />}</xsl:template><!-- bisognerebbe sostituire value-of con apply-templates ma c'è un bug... -->
+<xsl:key name="foo" match="/html/body/div[@id='footnotes']/ol/li" use="@id" />
+<xsl:template match="sup[@class='footnote']">\footnote{<xsl:value-of select="key('foo', substring(a/@href, 2))" />}</xsl:template>
+
 
 
 
